@@ -3,10 +3,10 @@ import torch.nn as nn
 
 
 class ClsNet(nn.Module):
-    def __init__(self):
+    def __init__(self, num_neuron):
         super(ClsNet, self).__init__()
-        self.fc1 = nn.Linear(27, 256)
-        self.fc2 = nn.Linear(256, 64)
+        self.fc1 = nn.Linear(27, num_neuron)
+        self.fc2 = nn.Linear(num_neuron, 64)
         self.cls = nn.Linear(64, 7)
 
     def forward(self, x):
