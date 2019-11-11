@@ -43,7 +43,8 @@ if __name__=='__main__':
         out = net.forward()
         target = out['Softmax1'].argmax()
         if target != pred:
-            print('idx:', i, 'data:', line, ' target:{}'.format(target), out['Softmax1'][0][target], ' pred:', pred)
+            print('idx:{},data:{},gt:{},pred:{},prob:{}'.format(i,np.delete(line, -1),pred,target,out['Softmax1'][0][target]))
+            print('idx:', i, 'data:', input, ' target:{}'.format(target), out['Softmax1'][0][target], ' pred:', pred)
         else:
             correct += 1
 
