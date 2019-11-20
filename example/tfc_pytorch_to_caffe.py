@@ -46,7 +46,7 @@ if __name__=='__main__':
     '''
     if not os.path.isdir(output_dir):
         os.makedirs(output_dir)
-    input=Variable(torch.ones([1,27]))
+    input=Variable(torch.ones([1,30]))
     pytorch_to_caffe.trans_net(model,input,name)
     prototxt_file = '{}/{}_{}.prototxt'.format(output_dir,name,num_neuron)
     pytorch_to_caffe.save_prototxt(prototxt_file)
@@ -65,7 +65,7 @@ if __name__=='__main__':
         else:
             content[i] = content[i].replace("view_blob1","Data1")
 
-    content.insert(0, 'layer {\nname: \"Data1\"\ntype: "Input"\ntop: \"Data1\"\ninput_param {\nshape {\ndim: 1\ndim: 27\ndim: 1\ndim: 1\n}\n}\n}\n')
+    content.insert(0, 'layer {\nname: \"Data1\"\ntype: "Input"\ntop: \"Data1\"\ninput_param {\nshape {\ndim: 1\ndim: 30\ndim: 1\ndim: 1\n}\n}\n}\n')
     content.insert(len(content),'layer {\nname: \"Softmax1\"\ntype: \"Softmax\"\nbottom: \"fc_blob3\"\ntop: \"Softmax1\"\n}\n')
 
     with open(prototxt_file,"w") as f2:
