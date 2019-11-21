@@ -36,14 +36,15 @@ if __name__=='__main__':
     cols = test_data.shape[1]
     for i in range(0, rows):
         line = test_data[i]
-        pred = line[cols-1]
-        input = np.delete(line, -1)
-        input = input.reshape(1,cols-1,1,1)
+        gt = line[cols-2].astype(np.int)
+        md5 = line[cols-1]
+        input = np.delete(line, [cols-2,cols-1]).astype(np.int)
+        input = input.reshape(1,cols-2,1,1)
         net.blobs['Data1'].data[...] = input
         out = net.forward()
         target = out['Softmax1'].argmax()
-        if target != pred:
-            print('idx:{},data:{},gt:{},pred:{},prob:{}'.format(i,np.delete(line, -1),pred,target,out['Softmax1'][0][target]))
+        if target != gt:
+            print('idx:{},data:{},gt:{},pred:{},prob:{},md5:{}'.format(i,np.delete(line, [cols-2,cols-1]).astype(np.int),gt,target,out['Softmax1'][0][target],md5))
         else:
             correct += 1
 
